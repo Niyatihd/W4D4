@@ -31,6 +31,8 @@ class User < ApplicationRecord
       nil 
     end
   end
+  
+  attr_reader :password 
 
   #Instance method: assigns session_token to each user, stores it in DB using user.save, and returns user's session_token
   def reset_session_token!
@@ -51,7 +53,7 @@ class User < ApplicationRecord
   end
   
   #Instance method: checks if the password matches password_digest of user
-  def is_password?
+  def is_password?(password)
     BCrypt::Password.new(self.password_digest).is_password?(password)
   end
 

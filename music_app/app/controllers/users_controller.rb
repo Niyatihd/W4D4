@@ -1,22 +1,28 @@
 class UsersController < ApplicationController
 
+  def index
+    @users = User.all
+    render :index
+  end
+
   def new
+    @user = User.new 
     render :new #render the new.html.erb view to sign up
   end
   
-  def show
-    @user = User.find_by(params[:id])
-
-    render json: @user
+  def show #only used to show that a user logged in in sessions_controller.rb
+    @user = User.find(params[:id])
+    render :show
   end
 
   def create
     @user = User.new(user_params)
+
     if @user.save!
       login!(@user)
-      redirect_to #######
+      redirect_to users_url
     else
-      render json: @user.errors.full_messages
+      redirect_to new_user_url
     end
 
   end

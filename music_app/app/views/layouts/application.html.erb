@@ -10,6 +10,15 @@
   </head>
 
   <body>
+    <% if flash[:errors] %>
+      <% flash[:errors].each do |error| %>
+        <%= error %>
+      <% end %>
+    <% end %>
+    <br>
+    <br>
+    <input type="submit" value="Logout">
+
     <%= yield %>
   </body>
 </html>
